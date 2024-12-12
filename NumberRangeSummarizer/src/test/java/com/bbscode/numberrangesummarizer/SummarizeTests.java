@@ -54,12 +54,33 @@ public class SummarizeTests {
     @Test
     public void multipleRange() {
         BBNumberRangeSummarizer rangeTest = new BBNumberRangeSummarizer();
-        String testString = "1,2,9,10";
-        String result = "1-2,9-10";
+        String testString = "1,2,9,10,11";
+        String result = "1-2,9-11";
+        assertEquals(result, rangeTest.summarizeCollection(rangeTest.collect(testString)));
+
+        testString = "13,14,16,17, 22,23";
+        result = "13-14,16-17,22-23";
         assertEquals(result, rangeTest.summarizeCollection(rangeTest.collect(testString)));
 
         testString = "1,2,3,4,5,7,8,9,20,21,22";
         result = "1-5,7-9,20-22";
+        assertEquals(result, rangeTest.summarizeCollection(rangeTest.collect(testString)));
+
+    }
+
+    @Test
+    public void mixedTests() {
+        BBNumberRangeSummarizer rangeTest = new BBNumberRangeSummarizer();
+        String testString = "1,2,5,9,10,11,22,91";
+        String result = "1-2,5,9-11,22,91";
+        assertEquals(result, rangeTest.summarizeCollection(rangeTest.collect(testString)));
+
+        testString = "13,14,16,17, 22,23, 25, 27, 90,91";
+        result = "13-14,16-17,22-23,25,27,90-91";
+        assertEquals(result, rangeTest.summarizeCollection(rangeTest.collect(testString)));
+
+        testString = "1,2,3,4,5,7,8,9,13,15,20,21,22";
+        result = "1-5,7-9,13,15,20-22";
         assertEquals(result, rangeTest.summarizeCollection(rangeTest.collect(testString)));
 
     }

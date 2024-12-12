@@ -40,15 +40,31 @@ public class BBNumberRangeSummarizer implements NumberRangeSummarizer {
 
         Integer cur = iter.next();
         while (iter.hasNext()) {
-            summary.append(Integer.toString(cur));
+            summary.append(cur);
             Integer next = iter.next();
             if (next != cur + 1) {
                 summary.append(",");
                 cur = next;
+            } else {
+                summary.append("-");
+                if (!iter.hasNext()) {
+                    summary.append(next);
+                    return summary.toString();
+                }
+                Integer endRange = next;
+                while ((next = iter.next()) == endRange + 1) {
+                    endRange = next;
+                    if (!iter.hasNext()) {
+                        summary.append(next);
+                        return summary.toString();
+                    }
+                }
+                summary.append(endRange + ",");
+                cur = next;
             }
 
         }
-        summary.append(Integer.toString(cur));
+        summary.append(cur);
 
         return summary.toString();
 
