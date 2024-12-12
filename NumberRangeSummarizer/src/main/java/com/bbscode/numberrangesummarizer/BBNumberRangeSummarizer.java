@@ -19,7 +19,11 @@ public class BBNumberRangeSummarizer implements NumberRangeSummarizer {
         int end;
 
         while ((end = input.indexOf(",", start)) >= 0) {
-            range.add(Integer.parseInt(input.substring(start, end).trim()));
+            try {
+                range.add(Integer.parseInt(input.substring(start, end).trim()));
+            } catch (NumberFormatException e) {
+                throw new NumberFormatException("Invalid Integer in string at index " + (range.size() - 1) + ".");
+            }
             start = end + 1;
         }
 
@@ -42,6 +46,9 @@ public class BBNumberRangeSummarizer implements NumberRangeSummarizer {
         while (iter.hasNext()) {
             summary.append(cur);
             Integer next = iter.next();
+            if (cur >= next) {
+                throw new IllegalStateException("Input provided is not in ascending order and unique.");
+            }
             if (next != cur + 1) {
                 summary.append(",");
                 cur = next;
