@@ -7,7 +7,12 @@
 
 The string input given to the `collect` function must simply be a comma delimited sequence of Integers and allows for spacing between the Integers and the commas. If an invalid Integer is encountered during parsing, a `NumberFormatException` is thrown, in line with the exception from `Integer.parseInt`. 
 
+`collect` returns an empty list if the input is null or the empty string.
+
 The `summarizeCollection` function will first remove the duplicates and sort the collection given before creating the summary. 
+
+`summarizeCollection` returns an empty string if the input is null or the empty string.
+
 
 ## Dependencies
 This package was written with Java 16 and Maven 3.9.4, and utilizes JUnit 5.11.

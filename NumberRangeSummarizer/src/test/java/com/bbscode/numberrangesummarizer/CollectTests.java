@@ -9,7 +9,7 @@ import org.junit.jupiter.api.Test;
 public class CollectTests {
 
     /*
-     * Provided Test Case
+     * Provided test case
      */
     @Test
     public void providedTest() {
@@ -77,10 +77,10 @@ public class CollectTests {
     }
 
     /**
-     * Tests empty input
+     * Tests empty and null input
      */
     @Test
-    public void emptyList() {
+    public void emptyAndNullInput() {
         BBNumberRangeSummarizer rangeTest = new BBNumberRangeSummarizer();
         String testString = "";
         assertEquals(Collections.emptyList(), rangeTest.collect(testString));

@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Test;
 public class SummarizeTests {
 
     /**
-     * Provided Test Case
+     * Provided test case
      */
     @Test
     public void providedTest() {
@@ -18,7 +18,7 @@ public class SummarizeTests {
     }
 
     /**
-     * Tests Single Digits
+     * Tests single digits
      */
     @Test
     public void singleDigits() {
@@ -34,14 +34,14 @@ public class SummarizeTests {
     }
 
     /**
-     * Tests Empty List
+     * Tests empty and null Collections
      */
     @Test
-    public void emptyList() {
+    public void emptyAndNullCollection() {
         BBNumberRangeSummarizer rangeTest = new BBNumberRangeSummarizer();
         String testString = "";
         assertEquals(testString, rangeTest.summarizeCollection(rangeTest.collect(testString)));
-
+        assertEquals(testString, rangeTest.summarizeCollection(rangeTest.collect(null)));
     }
 
     /**

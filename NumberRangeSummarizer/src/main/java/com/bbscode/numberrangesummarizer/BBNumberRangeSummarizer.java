@@ -55,7 +55,7 @@ public class BBNumberRangeSummarizer implements NumberRangeSummarizer {
     @Override
     public String summarizeCollection(Collection<Integer> input) {
 
-        if (input.size() == 0) {
+        if (input == null || input.size() == 0) {
             return "";
         }
 
