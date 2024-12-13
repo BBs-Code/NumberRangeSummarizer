@@ -3,14 +3,25 @@ package com.bbscode.numberrangesummarizer;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
-import java.util.Iterator;
+import java.util.TreeSet;
 
 public class BBNumberRangeSummarizer implements NumberRangeSummarizer {
 
+    /**
+     * Parses a comma delimited String of Integers and returns a Collection of
+     * Integers.
+     * Returns an empty list if the input is null or the empty String.
+     * 
+     * @param input - The String input to Parse
+     * @return Collection<Integer> - Returns an ArrayList of Integers.
+     * @exception NumberFormatException - Thrown if an invalid Integer is found
+     *                                  during parsing.
+     * 
+     */
     @Override
     public Collection<Integer> collect(String input) {
 
-        if (input.length() == 0) {
+        if (input == null || input.length() == 0) {
             return Collections.emptyList();
         }
 
@@ -32,6 +43,15 @@ public class BBNumberRangeSummarizer implements NumberRangeSummarizer {
         return range;
     }
 
+    /**
+     * Converts a Collection of Integers into a String with the sequential Integers
+     * colllapsed into ranges.
+     * Allows for unsorted or non-unique inputs by removing the duplicates and
+     * sorting the collection.
+     * 
+     * @param input - The collection to be converted
+     * @return String - The String representation of the range.
+     */
     @Override
     public String summarizeCollection(Collection<Integer> input) {
 
@@ -39,39 +59,29 @@ public class BBNumberRangeSummarizer implements NumberRangeSummarizer {
             return "";
         }
 
+        // Use a Tree Set to remove duplicates and sort the list
+        ArrayList<Integer> inputArray = new ArrayList<Integer>(new TreeSet<Integer>(input));
+
         StringBuilder summary = new StringBuilder();
-        Iterator<Integer> iter = input.iterator();
 
-        Integer cur = iter.next();
-        while (iter.hasNext()) {
+        for (int i = 0; i < inputArray.size(); i++) {
+            Integer cur = inputArray.get(i);
             summary.append(cur);
-            Integer next = iter.next();
-            if (cur >= next) {
-                throw new IllegalStateException("Input provided is not in ascending order and unique.");
-            }
-            if (next != cur + 1) {
-                summary.append(",");
-                cur = next;
-            } else {
-                summary.append("-");
-                if (!iter.hasNext()) {
-                    summary.append(next);
-                    return summary.toString();
+            // Check if we have a range
+            if ((i < inputArray.size() - 1) && cur + 1 == inputArray.get(i + 1)) {
+                // Loop until we find the end of the range
+                while ((i < inputArray.size() - 1) && cur + 1 == inputArray.get(i + 1)) {
+                    i++;
+                    cur = inputArray.get(i);
                 }
-                Integer endRange = next;
-                while ((next = iter.next()) == endRange + 1) {
-                    endRange = next;
-                    if (!iter.hasNext()) {
-                        summary.append(next);
-                        return summary.toString();
-                    }
-                }
-                summary.append(endRange + ",");
-                cur = next;
+                summary.append("-" + cur);
             }
 
+            // If there are numbers left, add a comma
+            if (i < inputArray.size() - 1) {
+                summary.append(", ");
+            }
         }
-        summary.append(cur);
 
         return summary.toString();
 

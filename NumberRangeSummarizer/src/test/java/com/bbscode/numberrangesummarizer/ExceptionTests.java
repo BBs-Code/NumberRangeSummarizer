@@ -1,14 +1,15 @@
 package com.bbscode.numberrangesummarizer;
 
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
-import java.util.ArrayList;
-import java.util.Collection;
 import org.junit.jupiter.api.Test;
 
 public class ExceptionTests {
 
+    /**
+     * Tests that the collect function correctly throws exceptions with invalid
+     * input
+     */
     @Test
     public void testInvalidStringCollect() {
         BBNumberRangeSummarizer rangeTest = new BBNumberRangeSummarizer();
@@ -24,26 +25,10 @@ public class ExceptionTests {
                 () -> {
                     rangeTest.summarizeCollection(rangeTest.collect(",,"));
                 });
-    }
-
-    @Test
-    public void testInvalidInputSummary() {
-
-        BBNumberRangeSummarizer rangeTest = new BBNumberRangeSummarizer();
-        assertThrows(IllegalStateException.class,
-                () -> {
-                    rangeTest.summarizeCollection(rangeTest.collect("3,2"));
-                });
-
-        assertThrows(IllegalStateException.class,
-                () -> {
-                    rangeTest.summarizeCollection(rangeTest.collect("3,3"));
-                });
         assertDoesNotThrow(
                 () -> {
-                    rangeTest.summarizeCollection(rangeTest.collect("1,3"));
+                    rangeTest.summarizeCollection(rangeTest.collect("1,2,3"));
                 });
-
     }
 
 }
