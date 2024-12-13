@@ -1,7 +1,6 @@
 package com.bbscode.numberrangesummarizer;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
