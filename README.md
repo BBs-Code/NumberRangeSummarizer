@@ -10,9 +10,11 @@ The string input given to the `collect` function must simply be a comma delimite
 The `summarizeCollection` function will first remove the duplicates and sort the collection given before creating the summary. 
 
 ## Dependencies
-This package was written with Java 16 and Maven 3.9.4, and utilizes JUnit 5.11. No external packages are required.
+This package was written with Java 16 and Maven 3.9.4, and utilizes JUnit 5.11.
 
 ## Usage
+`cd` into the NumberRangeSummarizer folder and then use the commands below as needed.
+
 `mvn compile` - Compiles the package for use.
 
 `mvn test` - Runs the included tests. 
